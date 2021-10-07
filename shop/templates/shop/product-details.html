@@ -1,0 +1,77 @@
+{% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- Product Details -->
+  <section class="section product-detail">
+    <div class="details container-md">
+      <div class="left">
+        <div class="main">
+          <img src="{{product.product_image}}" alt="">
+        </div>
+        <div class="thumbnails">
+          {% for other in other_image %}
+            <div class="thumbnail">
+              <img src="{{other}}" alt="">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="right">
+        <span>From {{product.category}}</span>
+        <h1>{{ product.product_name }}</h1>
+        <h4 class="price">Pay: &#x20A6;{{product.discount_price}}
+          <br>Instead of: <s>&#x20A6;{{product.product_price}}</s>
+        </h4>
+      <div>
+        <form action="{% url 'cart:cart_add' product.pk %}" method="POST">
+          {% csrf_token %}
+          {{ cart_add_form|crispy }}
+          <input type="submit" style="border:0;background:0;" value="Add to Cart">
+        </form>
+        <h3>About {{product.product_name}}</h3>
+        {{product.description|safe}}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="section featured">
+    <div class="top container">
+      <h1>Related Products</h1>
+      <a href="{% url 'product_list' %}" class="view-more">View more</a>
+    </div>
+    <div class="product-center container">
+    {% for product in related_products %}
+      <div class="product">
+        <div class="product-header">
+          <img src="{{product.product_image}}" alt="">
+          <ul class="icons">
+            <span><i class="bx bx-heart"></i></span>
+            <span><i class="bx bx-shopping-bag"></i></span>
+            <span><i class="bx bx-search"></i></span>
+          </ul>
+        </div>
+        <div class="product-footer">
+          <a href={% url 'product_detail' product.pk %}><h3>{{product.product_name}}</h3></a>
+          <div class="rating">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bx-star"></i>
+          </div>
+          <h4 class="price">{{product.product_price}}</h4>
+          <h4 class="price">{{product.discount_price}}</h4>
+
+        </div>
+      </div>
+      {% empty %}
+    {% endfor %}
+  </div>
+</section>
+
+{% include "shop/blog.html" %}
+
+{% include "shop/products.html"%}
+
+{% endblock content %}

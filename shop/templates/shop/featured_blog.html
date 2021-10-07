@@ -1,0 +1,25 @@
+<section class="section featured">
+  <div class="title">
+    <h1>Other Posts</h1>
+  </div>
+
+<div class="product-center container">
+  {% for post in other_posts %}
+  <div class="product">
+    <div class="product-header">
+      <a href=""><img src="{{ post.featured_image }}" alt="{{post.title}}"></a>
+      <ul class="icons">
+        <span><i class="bx bx-heart"></i></span>
+        <span><i class="bx bx-shopping-bag"></i></span>
+        <span><i class="bx bx-search"></i></span>
+      </ul>
+    </div>
+    <div class="product-footer">
+      <a href="{% url 'blog_detail' post.pk %}"><h5>{{ post.title }}</h5></a>
+      <small>{{ post.time_created|timesince }} ago</small>
+      <p>{{ post.body|truncatewords:10|safe}}</p>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+</section>

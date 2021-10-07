@@ -1,0 +1,37 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<section class="section all-products" id="products">
+  <div class="top container">
+      <h1>All Products</h1>
+  </div>
+  <div class="product-center container">
+    {% for blog in blogs %}
+    <div class="product">
+      <div class="product-header">
+        <a href="{% url 'blog_detail' blog.pk %}"><img src="{{ blog.featured_image }}" alt=""></a>
+        <ul class="icons">
+          <span>{{blog.likes.all.count}} likes<i class="bx bx-heart"></i></span>
+          <span><i class="bx bx-shopping-bag"></i></span>
+          <span><i class="bx bx-search"></i></span>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <a href="{% url 'blog_detail' blog.pk %}"><h3>{{ blog.title }}</h3></a>
+        <small>{{ blog.time_created|timesince }} ago</small>
+        <form action="{% url 'blog_like' blog.pk%}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit">
+              <span><i class="bx bx-heart"></i></span>
+            </button>
+        </form>
+        <p>{{ blog.body|truncatewords:10|safe }}</p>
+      </div>
+    </div>
+    {% empty %}
+    No Blog Post Yet
+      {% endfor %}
+  </div>
+
+</section>
+{% endblock content %}

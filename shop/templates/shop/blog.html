@@ -1,0 +1,33 @@
+<section class="section featured">
+  <div class="title">
+    <h1>Featured Blogs</h1>
+  </div>
+
+<div class="product-center container">
+  {% for blog in blogs %}
+  <div class="product">
+    <div class="product-header">
+      <a href="{% url 'blog_detail' blog.pk %}"><img src="{{ blog.featured_image }}" alt="{{blog.title}}"></a>
+      <ul class="icons">
+        <span>{{blog.likes.all.count}} Likes</span>
+        <span><i class="bx bx-shopping-bag"></i></span>
+        <span><i class="bx bx-search"></i></span>
+      </ul>
+    </div>
+    <div class="product-footer">
+      <a href="{% url 'blog_detail' blog.pk %}"><h5>{{ blog.title }}</h5>
+        <form action="{% url 'blog_like' blog.pk%}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path}}">
+            <button type="submit">
+              <span><i class="bx bx-heart"></i></span>
+            </button>
+        </form>
+      </a>
+      <small>{{ blog.time_created|timesince }} ago</small>
+      <p>{{ blog.body|truncatewords:10|safe}}</p>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+</section>

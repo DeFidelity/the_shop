@@ -1,0 +1,83 @@
+  <!-- Header -->
+  <header id="home" class="header">
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="navigation container">
+        <div class="logo">
+          <h1>My Shop</h1>
+        </div>
+
+        <div class="menu">
+          <div class="top-nav">
+            <div class="logo">
+              <h1>MY Shop</h1>
+            </div>
+            <div class="close">
+              <i class="bx bx-x"></i>
+            </div>
+          </div>
+
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="{% url 'index' %}" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'product_list' %}" class="nav-link">Products</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'blog_list' %}" class="nav-link">Posts</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'about_us' %}" class="nav-link">About</a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a href="{% url 'account_logout'%}" class="nav-link">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a href="{% url 'account_signup'%}" class="nav-link">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'account_login'%}" class="nav-link">Login</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a href="{% url 'cart:cart_detail'%}" class="nav-link icon"><i class="bx bx-shopping-bag"></i></a>
+            </li>
+          </ul>
+        </div>
+
+
+          {% with total_items=cart|length %}
+          {% if total_item > 0 %}
+              <a href="{% url 'cart:cart_detail'%}" class="cart-icon">
+              <i class="bx bx-shopping-bag">{{ total_item }}</i>
+              <h4 class="price">&#x20A6; {{cart.get_total_price}}</h4>
+          {% else %}
+              {{ total_item }}
+              Your cart is empty!
+          {% endif %}
+          {% endwith %}
+
+
+        </a>
+
+        <div class="hamburger">
+          <i class="bx bx-menu"></i>
+        </div>
+      </div>
+    </nav>
+
+    <img src="{{promotion.header_legend}}" alt="" class="hero-img" style="max-height:24%;"/>
+
+      <div class="hero-content">
+        {{promotion.legend_text}}
+        <h2><span class="discount">70% </span> SALE OFF</h2>
+        <h1>
+          <span>Summer Vibes</span>
+          <span>mode on</span>
+        </h1>
+        <a class="btn" href="{% url 'product_list'%}">Shop Now</a>
+      </div>
+</header>

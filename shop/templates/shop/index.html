@@ -1,0 +1,134 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+  <!-- Main -->
+  <main>
+    <section class="advert section">
+      <div class="advert-center container">
+        <div class="advert-box">
+          <div class="dotted">
+            <div class="content">
+              <h2>
+                Girls <br />
+                Clothing
+              </h2>
+              <h4>Worlds Best Brands</h4>
+            </div>
+          </div>
+          <img src="{{promotion.second_level_one}}" alt="">
+        </div>
+
+        <div class="advert-box">
+          <div class="dotted">
+            <div class="content">
+              <h2>
+                Summer <br />
+                Clothing
+              </h2>
+              <h4>Worlds Best Brands</h4>
+            </div>
+          </div>
+          <img src="{{promotion.second_level_two}}" alt="">
+        </div>
+
+        <div class="advert-box">
+          <div class="dotted">
+            <div class="content">
+              <h2>
+                Boys <br />
+                Clothing
+              </h2>
+              <h4>Worlds Best Brands</h4>
+            </div>
+          </div>
+          <img src="{{promotion.second_level_three}}" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- featured blogs -->
+    {% include "shop/blog.html" %}
+    <!-- Featured products-->
+    {% include "shop/products.html" %}
+
+    <!-- latest products -->
+    {% include "shop/latest_products.html" %}
+    <!-- Product Banner -->
+    <section class="section">
+      <div class="product-banner">
+        <div class="left">
+          <img src="./images/test.jpg" alt="" />
+        </div>
+        <div class="right">
+          <div class="content">
+            <h2><span class="discount">70% </span> SALE OFF</h2>
+            <h1>
+              <span>Collect Your</span>
+              <span>Kids Collection</span>
+            </h1>
+            <a class="btn" href="#">shop now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <div class="testimonial-center container">
+        <div class="testimonial">
+          <span>&ldquo;</span>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
+            fugiat labore. Veritatis et omnis consequatur.
+          </p>
+          <div class="rating">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bx-star"></i>
+          </div>
+          <div class="img-cover">
+            <img src="./images/profile1.jpg" alt="" />
+          </div>
+          <h4>Will Smith</h4>
+        </div>
+        <div class="testimonial">
+          <span>&ldquo;</span>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
+            fugiat labore. Veritatis et omnis consequatur.
+          </p>
+          <div class="rating">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bx-star"></i>
+          </div>
+          <div class="img-cover">
+            <img src="./images/profile2.jpg" alt="" />
+          </div>
+          <h4>Will Smith</h4>
+        </div>
+        <div class="testimonial">
+          <span>&ldquo;</span>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
+            fugiat labore. Veritatis et omnis consequatur.
+          </p>
+          <div class="rating">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bx-star"></i>
+          </div>
+          <div class="img-cover">
+            <img src="./images/profile3.jpg" alt="" />
+          </div>
+          <h4>Will Smith</h4>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock content %}

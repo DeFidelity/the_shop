@@ -1,0 +1,78 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Cart Items -->
+  <div class="container-md cart">
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+
+        {% for item in cart %}
+        {% with product=item.product %}
+        <tr>
+        <td>
+          <div class="cart-info">
+            <a href="{{product.get_absolute_url}}">
+            <img src="{{product.product_image}}" alt="">
+            </a>
+            <div>
+              <p><a href="{% url 'product_detail' product.pk%}" style="color:black;">{{product.product_name}}</a></p>
+              <span>{{produce.product_price}}</span>
+              <br />
+              <form class="" action="{% url 'cart:cart_remove' product.id%}" method="POST">
+                {% csrf_token %}
+                <a href="{% url 'cart:cart_remove' product.id%}"><input style="border:0;background:0;color:red;" value="remove" type="submit"></a>
+              </form>
+            </div>
+          </div>
+        </td>
+
+        <!-- htmx later -->
+        <td>{{item.quantity}}
+          <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+            {{ item.update_quantity_form.quantity }}
+            {{ item.update_quantity_form.override }}
+            <input style="border:0;background:0;color:green;" type="submit" value="update">
+            {% csrf_token %}
+          </form>
+        </td>
+
+
+        <td>&#x20A6;{{item.total_price}}</td>
+        </tr>
+        {% endwith %}
+        {% endfor %}
+
+    </table>
+
+    <div class="total-price">
+      <table>
+        <tr>
+          <td>Subtotal</td>
+          <td>&#x20A6;{{item.total_price}}</td>
+        </tr>
+        <tr>
+          <td>Delivery</td>
+          <td>&#x20A6;50</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>&#x20A6;{{cart.get_total_price}}</td>
+        </tr>
+      </table>
+      <a href="#" class="checkout btn">Proceed To Checkout</a>
+      <a href="{% url 'product_list'%}" class="checkout btn">Continue Shopping</a>
+
+
+
+    </div>
+
+  </div>
+
+
+{% endblock content %}
